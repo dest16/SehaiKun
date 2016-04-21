@@ -16,9 +16,14 @@
 
 package com.destin.sehaikun;
 
+import android.animation.Animator;
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.support.v4.view.animation.FastOutLinearInInterpolator;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
+import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.view.animation.Interpolator;
 
 public class AnimationUtils {
@@ -26,4 +31,34 @@ public class AnimationUtils {
     public static final Interpolator FAST_SLOW_INTERPOLATOR = new LinearOutSlowInInterpolator();
     public static final Interpolator SLOW_FAST_INTERPOLATOR = new FastOutLinearInInterpolator();
     public static final Interpolator SLOW_FAST_SLOW_INTERPOLATOR = new FastOutSlowInInterpolator();
+
+    public static final int ANIMATION_DURATION_SHORT = 150;
+    public static final int ANIMATION_DURATION_MEDIUM = 400;
+    public static final int ANIMATION_DURATION_LONG = 800;
+
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public static void reveal(View view, float startRadius, float endRadius, Animator.AnimatorListener listener) {
+        int cx = view.getWidth() / 2;
+        int cy = view.getHeight() / 2;
+        Animator animator = ViewAnimationUtils.createCircularReveal(view, cx, cy, startRadius, endRadius);
+        if (listener != null) {
+            animator.addListener(listener);
+        }
+        animator.start();
+    }
+
+
+    public static void revealOut(View view, Animator.AnimatorListener listener) {
+        float sr = 0;
+        float er = Math.max(view.getWidth(), view.getHeight());
+        reveal(view, sr, er, listener);
+
+    }
+
+    public static void revealIn(View view, Animator.AnimatorListener listener) {
+        float sr = Math.max(view.getWidth(), view.getHeight());
+        float er = 0;
+        reveal(view, sr, er, listener);
+    }
 }
