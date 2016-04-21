@@ -53,7 +53,6 @@ public class AnimationUtils {
         float sr = 0;
         float er = Math.max(view.getWidth(), view.getHeight());
         reveal(view, sr, er, listener);
-
     }
 
     public static void revealIn(View view, Animator.AnimatorListener listener) {
