@@ -38,26 +38,13 @@ public class AnimationUtils {
 
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public static void reveal(View view, float startRadius, float endRadius, Animator.AnimatorListener listener) {
-        int cx = view.getWidth() / 2;
-        int cy = view.getHeight() / 2;
-        Animator animator = ViewAnimationUtils.createCircularReveal(view, cx, cy, startRadius, endRadius);
+    public static void reveal(View view, int centerX, int centerY, float startRadius, float endRadius, Animator.AnimatorListener listener) {
+        Animator animator = ViewAnimationUtils.createCircularReveal(view, centerX, centerY, startRadius, endRadius);
+        animator.setDuration(ANIMATION_DURATION_MEDIUM);
         if (listener != null) {
             animator.addListener(listener);
         }
         animator.start();
     }
 
-
-    public static void revealOut(View view, Animator.AnimatorListener listener) {
-        float sr = 0;
-        float er = Math.max(view.getWidth(), view.getHeight());
-        reveal(view, sr, er, listener);
-    }
-
-    public static void revealIn(View view, Animator.AnimatorListener listener) {
-        float sr = Math.max(view.getWidth(), view.getHeight());
-        float er = 0;
-        reveal(view, sr, er, listener);
-    }
 }

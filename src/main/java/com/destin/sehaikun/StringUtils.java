@@ -31,7 +31,7 @@ public class StringUtils {
     }
 
     public static boolean isEmpty(String string) {
-        return TextUtils.isEmpty(string) || string.trim().length() == 0 || NULL.equalsIgnoreCase(string);
+        return TextUtils.isEmpty(string) || string.trim().length() == 0;
     }
 
     public static String hideInfo(String raw) {
