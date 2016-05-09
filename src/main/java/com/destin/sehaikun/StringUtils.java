@@ -3,12 +3,15 @@ package com.destin.sehaikun;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.DecimalFormat;
 
 /**
  * Created by dest1 on 2015/9/25.
  */
 public class StringUtils {
+    private final static String CHAR_SET = "utf-8";
     private final static String NULL = "null";
     private final static String STARS = "****";
     public final static String[] EMPTY_ARRAY = new String[0];
@@ -54,5 +57,21 @@ public class StringUtils {
             str = String.format("%s亿元", df.format(money / 100000000.0));
         }
         return str;
+    }
+
+    public static String encode(String input) {
+        String output = null;
+        try {
+            output = URLEncoder.encode(input, CHAR_SET);
+        } catch (UnsupportedEncodingException e) {
+            //do nothing
+        }
+        return output;
+    }
+
+    public static String[] split(String string, String regularExpression) {
+        if (isEmpty(string))
+            return EMPTY_ARRAY;
+        return string.split(regularExpression);
     }
 }
